@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql" // or "mysql", "sqlite", etc. depending on your database
+  url      = env("DATABASE_URL") // The database connection string from your environment variables
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  author    String // This will now store the author's name
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  email String @unique
+  posts Post[] // This is the inverse of the relation
+}
