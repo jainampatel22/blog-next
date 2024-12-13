@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export async function POST(req: NextRequest) {
   try {
     // Parse the incoming request body
-    const { title, content,published } = await req.json()
+    const { title, content } = await req.json()
 
     // Fetch the session (this assumes you're using next-auth for authentication)
     const session = await getServerSession(authOptions)
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     // Find or create the user by name (if the user doesn't exist)
     const author = await prisma.user.upsert({
-      where: { email:session.user.email },  // Using name as the unique identifier
+      where: { email:session.user.email|| undefined },  // Using name as the unique identifier
       update: {},  // No updates needed if user exists
       create: {
         name: authorName,
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     // Return the created post as a response
     return NextResponse.json(post, { status: 200 })
-  } catch (error: any) {
+  } catch (error) {
     // Handle and log any errors
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
     console.error('Error creating post:', errorMessage)

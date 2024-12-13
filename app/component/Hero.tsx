@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 
 export default function Hero() {
@@ -28,12 +29,12 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <a href="/api/auth/signin" className="rounded-full bg-purple-600 px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-purple-700">
+        <Link href="/api/auth/signin" className="rounded-full bg-purple-600 px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-purple-700">
           Sign In
-        </a>
-        <a href="/api/auth/signup" className="rounded-full border-2 border-purple-600 px-6 py-3 text-lg font-semibold text-purple-600 transition-colors hover:bg-purple-100">
+        </Link>
+        <Link href="/api/auth/signup" className="rounded-full border-2 border-purple-600 px-6 py-3 text-lg font-semibold text-purple-600 transition-colors hover:bg-purple-100">
           Sign Up
-        </a>
+        </Link>
       </motion.div>
     </section>
   )

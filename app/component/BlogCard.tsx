@@ -2,7 +2,7 @@
 import { Card ,CardContent ,CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BrandSlogan } from './BrandSlogan';
-import { useRouter } from 'next/navigation';
+
 interface BlogTypes {
     id: string;
     title: string;
@@ -15,7 +15,7 @@ interface BlogTypes {
 }
 
 export const BlogCard = ({ blogs }: { blogs: BlogTypes[] }) => {
-    const router = useRouter()
+  
 
     if (!blogs || blogs.length === 0) {
         return <div>No blogs found</div>;

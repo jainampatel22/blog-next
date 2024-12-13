@@ -6,8 +6,8 @@ import { authOptions } from "./libs/auth";
 export default async function Page() {
   const session = await getServerSession( authOptions);
   if (session?.user) {
-    redirect("/dashboard");
+    redirect("/blogs");
   } else {
-    redirect("/api/auth/signin");
+    redirect("/dashboard");
   }
 }

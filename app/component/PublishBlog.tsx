@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useRouter } from 'next/navigation'
-import { useParams } from 'next/navigation'
+
 interface PublishBlogProps {
   author: string; // Added author prop to handle server-side author name
 }
@@ -17,9 +17,9 @@ export default function PublishBlog({ author }: PublishBlogProps) {
   const [content, setContent] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null);
+
 const router = useRouter()
-const {id}=useParams()
+
   const postBlog = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -30,7 +30,7 @@ const {id}=useParams()
 
     setIsLoading(true)
     setError(null)
-    setSuccess(null)
+    
 
     try {
       const response = await fetch('/api/publish', {
@@ -50,12 +50,16 @@ const {id}=useParams()
   
       setTitle('')
       setContent('')
-      setSuccess('Your Blog Has Been Added Successfully ! ')
+ 
      
    router.push(`/blogs/${data.id}`)
-    } catch (err: any) {
-      setError(err.message)
-    } finally {
+    }catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
+      }finally {
       setIsLoading(false)
     }
   }

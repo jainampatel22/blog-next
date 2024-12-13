@@ -77,7 +77,7 @@ interface BlogDetailCardProps {
             <div>
               <p className="font-semibold">{blog.author.name}</p>
               <p className="text-sm text-muted-foreground">
-                Author bio goes here. This is a brief description of the author's background and expertise.
+                Author bio goes here. This is a brief description of the authors background and expertise.
               </p>
             </div>
           </CardContent>

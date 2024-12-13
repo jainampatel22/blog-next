@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 
 const testimonials = [
@@ -38,7 +39,7 @@ export default function Testimonials() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <div className="mb-4 flex items-center">
-              <img 
+              <Image 
                 src={testimonial.avatar} 
                 alt={testimonial.name} 
                 width={40} 
