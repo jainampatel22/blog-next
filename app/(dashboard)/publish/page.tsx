@@ -1,14 +1,11 @@
+// app/(dashboard)/publish/page.tsx
+import PublishBlog from "@/app/component/PublishBlog";
 
-import PublishBlog from '@/app/component/PublishBlog'
+// Props definition
+interface PageProps {
+  author: string;
+}
 
-
-
-
-
-
-  // Pass the author's name to the page
-
-
-export default function PublishPage({ author }: { author: string }) {
-  return <PublishBlog author={author} />
+export default function PublishPage({ author }: PageProps) {
+  return <PublishBlog author={author} />;
 }

@@ -17,8 +17,7 @@ export default function PublishBlog({ author }: PublishBlogProps) {
   const [content, setContent] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
-const router = useRouter()
+  const router = useRouter()
 
   const postBlog = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,7 +29,6 @@ const router = useRouter()
 
     setIsLoading(true)
     setError(null)
-    
 
     try {
       const response = await fetch('/api/publish', {
@@ -38,7 +36,7 @@ const router = useRouter()
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, content, author }), // Use author passed from the server side
+        body: JSON.stringify({ title, content, author }), // Use author passed from the server-side
       })
 
       if (!response.ok) {
@@ -47,19 +45,17 @@ const router = useRouter()
 
       const data = await response.json()
       console.log('Post published:', data)
-  
+
+      // Clear form fields on success
       setTitle('')
       setContent('')
- 
-     
-   router.push(`/blogs/${data.id}`)
-    }catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unexpected error occurred");
-        }
-      }finally {
+
+      // Redirect to the new blog post page
+      router.push(`/blogs/${data.id}`)
+    } catch (error) {
+      // Catch any errors and show the message
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+    } finally {
       setIsLoading(false)
     }
   }
